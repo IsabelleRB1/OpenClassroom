@@ -83,7 +83,7 @@ else:
     st.plotly_chart(fig)
     
     #Print the important features for the evaluation of the probability
-    feature_important_sorted = pd.read_csv('../input/features_importance.csv')
+    feature_important_sorted = pd.read_csv('C:/Users/cyril/Documents/Isa/DataScience/Projet7/input/features_importance.csv')
     
     feature_important = feature_important_sorted['feature'].head(10)
  
