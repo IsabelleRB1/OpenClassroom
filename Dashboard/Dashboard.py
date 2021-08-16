@@ -16,7 +16,7 @@ filename = '../notebook/finalized_model.sav'
 model_reloaded = pickle.load(open(filename, 'rb'))
 #read the data
 
-app_train_domain = pd.read_csv('../input/app_train_domain.csv')
+app_train_domain = pd.read_csv('C:/Users/cyril/Documents/Isa/DataScience/Projet7/input/app_train_domain.csv')
 
 #select features used to make the prediction
 feats = [f for f in app_train_domain.columns if f not in ['TARGET','SK_ID_CURR',
