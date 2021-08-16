@@ -12,7 +12,7 @@ st.write("""
 
 
 # load the model from disk
-filename = '../notebook/finalized_model.sav'
+filename = 'C:/Users/cyril/Documents/Isa/DataScience/Projet7/notebook/finalized_model.sav'
 model_reloaded = pickle.load(open(filename, 'rb'))
 #read the data
 
