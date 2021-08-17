@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run C:/Users/cyril/Documents/Isa/DataScience/Projet7/Dashboard/Dashboard.py
+web: sh setup.sh && streamlit run C:\Users\cyril\Documents\Isa\DataScience\Projet7\Dashboard\Dashboard.py
