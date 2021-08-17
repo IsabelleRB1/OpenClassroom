@@ -12,11 +12,11 @@ st.write("""
 
 
 # load the model from disk
-filename = 'C:/Users/cyril/Documents/Isa/DataScience/Projet7/notebook/finalized_model.sav'
+filename = 'notebook/finalized_model.sav'
 model_reloaded = pickle.load(open(filename, 'rb'))
 #read the data
 
-app_train_domain = pd.read_csv('C:/Users/cyril/Documents/Isa/DataScience/Projet7/input/app_train_domain.csv')
+app_train_domain = pd.read_csv('input/app_train_domain_trunc.csv')
 
 #select features used to make the prediction
 feats = [f for f in app_train_domain.columns if f not in ['TARGET','SK_ID_CURR',
@@ -83,7 +83,7 @@ else:
     st.plotly_chart(fig)
     
     #Print the important features for the evaluation of the probability
-    feature_important_sorted = pd.read_csv('C:/Users/cyril/Documents/Isa/DataScience/Projet7/input/features_importance.csv')
+    feature_important_sorted = pd.read_csv('input/features_importance.csv')
     
     feature_important = feature_important_sorted['feature'].head(10)
  
