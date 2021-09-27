@@ -6,6 +6,5 @@ plotly
 pandas
 lightgbm
 pandas
-sklearn.neighbors
-sklearn.impute
+sklearn
 pickle
