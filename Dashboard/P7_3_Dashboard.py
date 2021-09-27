@@ -2,14 +2,17 @@ import pandas as pd
 import streamlit as st
 
 import pickle
+
 import plotly.graph_objects as go
 import plotly.express as px
+
 from sklearn.neighbors import NearestNeighbors
+
 import numpy as np
 from sklearn.impute import SimpleImputer 
-import sys
-sys.path.append('..\\utils')
-import SessionState
+#import sys
+#sys.path.append('..\\utils')
+#import SessionState
 import RadarPlot as rp
 
 
@@ -41,28 +44,28 @@ app_train_domain.drop(app_train_domain[app_train_domain['ANNUITY_INCOME_PERCENT'
 feats = [f for f in app_train_domain.columns if f not in ['TARGET','SK_ID_CURR',
                                                       'SK_ID_BUREAU','SK_ID_PREV','index']]
 #request the user to enter the ID on which to apply the prediction
-session_state = SessionState.get(user_input=100002) 
+#session_state = SessionState.get(user_input=100002) 
 loan_id = int(st.sidebar.text_input("Enter the loan request id of the customer",100002))
-session_state.user_input=loan_id
+user_input=loan_id
 list_id = app_train_domain.index.to_list()
 list_id = list_id + app_test_domain.index.to_list()
 
-if session_state.user_input not in list_id:
+if user_input not in list_id:
     st.sidebar.write("The id entered is unknown")
 else:
     pred_features = []
     pred_labels = []
     desc_features = []
     #The loan id belongs to the training data
-    if session_state.user_input in app_train_domain.index.to_list():
+    if user_input in app_train_domain.index.to_list():
         # Data to predict
-        pred_features, pred_labels = app_train_domain.loc[session_state.user_input][feats],app_train_domain.loc[session_state.user_input]['TARGET']
+        pred_features, pred_labels = app_train_domain.loc[user_input][feats],app_train_domain.loc[user_input]['TARGET']
         pred_features=pred_features.values.reshape(1, -1)
     #The loan id belongs to the test data  
     else:
-        if session_state.user_input in app_test_domain.index.tolist():
+        if user_input in app_test_domain.index.tolist():
             # Data to predict
-            pred_features = app_test_domain.loc[session_state.user_input][feats]
+            pred_features = app_test_domain.loc[user_input][feats]
             pred_features = pred_features.values.reshape(1, -1)
             
   
@@ -187,14 +190,14 @@ else:
     cust_features_print =  pd.DataFrame()
     
     st.write("Main features concerning the customer")
-    if session_state.user_input in app_train_domain.index.to_list():
-        cust_features = pd.to_numeric(desc_features_train[cat_list_float].loc[session_state.user_input])
+    if user_input in app_train_domain.index.to_list():
+        cust_features = pd.to_numeric(desc_features_train[cat_list_float].loc[user_input])
         cust_features_print = cust_features
         cust_features_print = cust_features_print.map('{:,.1f}'.format)
  
        
     else :
-        cust_features = pd.to_numeric(desc_features_test[cat_list_float].loc[session_state.user_input])
+        cust_features = pd.to_numeric(desc_features_test[cat_list_float].loc[user_input])
         cust_features_print = cust_features
         cust_features_print = cust_features_print.map('{:,.1f}'.format)
  
@@ -251,11 +254,11 @@ else:
             
             col_features = [col for col in app_train_domain.columns if select_feature in col]
             for col in col_features:
-                if session_state.user_input in app_train_domain.index.to_list():
-                    if app_train_domain[col].loc[session_state.user_input]==1:
+                if user_input in app_train_domain.index.to_list():
+                    if app_train_domain[col].loc[user_input]==1:
                         st.write('The {} of the customer is {}'.format(sel_feature,col).replace(select_feature+'_',''))
                 else:
-                     if app_test_domain[col].loc[session_state.user_input]==1:
+                     if app_test_domain[col].loc[user_input]==1:
                          st.write('The {} of the customer is {}'.format(sel_feature,col.replace(select_feature+'_','')))
         with col2_2:    
           
