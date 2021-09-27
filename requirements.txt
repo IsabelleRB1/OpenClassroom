@@ -7,4 +7,3 @@ pandas
 lightgbm
 pandas
 sklearn
-pickle
