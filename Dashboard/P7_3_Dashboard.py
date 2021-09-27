@@ -248,25 +248,25 @@ else:
     
     #Compare the value of main features of the customers with its closes neigbors
     #select the K=5 nearest neighbours of the loan  
-    train_df_knn = app_train_domain[app_train_domain['TARGET'].notnull()]
-    test_df_knn = app_test_domain
-    train_df_knn_feats = train_df_knn[feats]
-    test_df_knn_feats = test_df_knn[feats]
+   # train_df_knn = app_train_domain[app_train_domain['TARGET'].notnull()]
+    #test_df_knn = app_test_domain
+    #train_df_knn_feats = train_df_knn[feats]
+    #test_df_knn_feats = test_df_knn[feats]
 
     #input missing values
   
-    imputer=SimpleImputer(missing_values=np.nan,strategy='mean')
-    imputer=imputer.fit(train_df_knn_feats)
-    train_df_knn_feats=imputer.transform(train_df_knn_feats)
-    pred_features_knn = pred_features
-    pred_features_knn = imputer.transform(pred_features_knn)
+    #imputer=SimpleImputer(missing_values=np.nan,strategy='mean')
+    #imputer=imputer.fit(train_df_knn_feats)
+    #train_df_knn_feats=imputer.transform(train_df_knn_feats)
+    #pred_features_knn = pred_features
+    #pred_features_knn = imputer.transform(pred_features_knn)
    
     #find the neighbors of the training set
-    neigh = NearestNeighbors(n_neighbors=5)
-    neigh.fit(train_df_knn_feats)
+    #neigh = NearestNeighbors(n_neighbors=5)
+    #neigh.fit(train_df_knn_feats)
 
-    index_neighbors = neigh.kneighbors(pred_features_knn.reshape(1, -1),return_distance=False)
-    index_neighbors_id = app_train_domain.iloc[index_neighbors[0]].index
+    #index_neighbors = neigh.kneighbors(pred_features_knn.reshape(1, -1),return_distance=False)
+    #index_neighbors_id = app_train_domain.iloc[index_neighbors[0]].index
     
     
     
@@ -329,7 +329,7 @@ else:
     
    
     st.write("Main features of similar customers")
-    st.table(desc_features_train_print.loc[index_neighbors_id])
+    #st.table(desc_features_train_print.loc[index_neighbors_id])
    
     #Compare the values of a selected set of features with the values of those features for all others customers 
     with st.beta_expander("Make comparison with others customers"):
