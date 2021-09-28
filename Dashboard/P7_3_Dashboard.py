@@ -161,8 +161,14 @@ else:
                       'CREDIT_INCOME_PERCENT':'Credit amount over income in %',
                       'AMT_CREDIT':'Credit amount in $','EXT_SOURCE_3':'External source 3',
                       'EXT_SOURCE_2':'External source 2'}
+    col_dict_test = {'CREDIT_TERM':'Credit duration in year','DAYS_BIRTH':'Age', 
+                      'DAYS_EMPLOYED':'Employment duration in year', 'ANNUITY_INCOME_PERCENT':'Annuity over income in %',
+                      'AMT_ANNUITY':'Annuity amount in $',
+                      'CREDIT_INCOME_PERCENT':'Credit amount over income in %',
+                      'AMT_CREDIT':'Credit amount in $','EXT_SOURCE_3':'External source 3',
+                      'EXT_SOURCE_2':'External source 2'}
     desc_features_train = desc_features_train.rename(columns=col_dict)
-    desc_features_test = desc_features_test.rename(columns=col_dict)
+    desc_features_test = desc_features_test.rename(columns=col_dict_test)
    
    
     #convert features
@@ -190,7 +196,7 @@ else:
     cust_features =  pd.DataFrame()
     cust_features_print =  pd.DataFrame()
     if user_input not in app_train_domain.index.to_list():
-        st.table(desc_features_test[cat_list_float].loc[user_input])
+        st.write(desc_features_test['Credit duration in year'].loc[user_input])
     st.write("Main features concerning the customer")
     if user_input in app_train_domain.index.to_list():
         cust_features = pd.to_numeric(desc_features_train[cat_list_float].loc[user_input])
