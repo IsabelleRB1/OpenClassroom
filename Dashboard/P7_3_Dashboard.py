@@ -5,8 +5,7 @@ import pickle
 
 import plotly.graph_objects as go
 import plotly.express as px
-import matplotlib.pyplot as plt
-from sklearn.neighbors import NearestNeighbors
+
 
 import numpy as np
 from sklearn.impute import SimpleImputer 
@@ -42,6 +41,7 @@ app_test_domain.set_index('SK_ID_CURR',inplace=True)
 
 app_train_domain.drop(app_train_domain[app_train_domain['ANNUITY_INCOME_PERCENT']>1].index, inplace=True)
 app_test_domain.drop(app_test_domain[app_test_domain['ANNUITY_INCOME_PERCENT']>1].index, inplace=True)
+
 #select features used to make the prediction
 feats = [f for f in app_train_domain.columns if f not in ['TARGET','SK_ID_CURR',
                                                       'SK_ID_BUREAU','SK_ID_PREV','index']]
@@ -141,12 +141,9 @@ else:
     pred_features_knn = imputer.transform(pred_features_knn)
    
     #find the neighbors of the training set
-    #neigh = NearestNeighbors(n_neighbors=5)
-    #neigh.fit(train_df_knn_feats)
 
     index_neighbors = neigh_model.kneighbors(pred_features_knn.reshape(1, -1),return_distance=False)
     index_neighbors_id = app_train_domain.iloc[index_neighbors[0]].index
-    
     
     
     #Select main features to compare 
@@ -208,12 +205,12 @@ else:
    
     st.write("Main features of similar customers")
     st.table(desc_features_train_print.loc[index_neighbors_id])
-   
+    submit_button = False
     #Compare the values of a selected set of features with the values of those features for all others customers 
     with st.beta_expander("Make comparison with others customers"):
         col1_1, col2_1 = st.beta_columns([10, 20]) 
         with col1_1:    
-            st.write('Select features for which you want to compare the customer with others ones')
+            st.write('Select at least 3 features for which you want to compare the customer with others ones')
             option = [] 
             i=0
             with st.form(key='Selecting features'):
@@ -227,11 +224,16 @@ else:
             if submit_button:
                 cat_selected = [] 
                 i=0
+                j=0
                 while i < len(option):
                     if option[i] == True:
                         cat_selected.append(cat_list_float[i])
+                        j=j+1
                     i = i+1
-                rp.radar_plot(cust_features,desc_features_train,cat_selected)
+                if j>=3:
+                    rp.radar_plot(cust_features,desc_features_train,cat_selected)
+                else:
+                    st.write('Select at least 3 features')
   
     #For categorical features, calculate for each possible values the number of loans with payment difficulties
     with st.beta_expander("Percentage of customers with payment difficulties for values of a particular feature"):
