@@ -51,8 +51,7 @@ loan_id = int(st.sidebar.text_input("Enter the loan request id of the customer",
 user_input=loan_id
 list_id = app_train_domain.index.to_list()
 list_id = list_id + app_test_domain.index.to_list()
-if user_input not in app_train_domain.index.to_list():
-        st.write('test',app_test_domain['CREDIT_TERM'].loc[user_input])
+
 if user_input not in list_id:
     st.sidebar.write("The id entered is unknown")
 else:
