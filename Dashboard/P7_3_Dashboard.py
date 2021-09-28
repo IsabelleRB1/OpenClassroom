@@ -148,7 +148,8 @@ else:
     index_neighbors_id = app_train_domain.iloc[index_neighbors[0]].index
     
     
-    
+    if user_input not in app_train_domain.index.to_list():
+        st.write(app_test_domain['CREDIT_TERM'].loc[user_input])
     #Select main features to compare 
     cat_list = ['TARGET','CREDIT_TERM','DAYS_BIRTH', 
                       'DAYS_EMPLOYED', 'ANNUITY_INCOME_PERCENT','AMT_ANNUITY',
@@ -195,8 +196,7 @@ else:
    
     cust_features =  pd.DataFrame()
     cust_features_print =  pd.DataFrame()
-    if user_input not in app_train_domain.index.to_list():
-        st.write(desc_features_test['Credit duration in year'].loc[user_input])
+   
     st.write("Main features concerning the customer")
     if user_input in app_train_domain.index.to_list():
         cust_features = pd.to_numeric(desc_features_train[cat_list_float].loc[user_input])
