@@ -189,14 +189,12 @@ else:
    
     cust_features =  pd.DataFrame()
     cust_features_print =  pd.DataFrame()
-    
+    st.table(desc_features_test[cat_list_float].loc[user_input])
     st.write("Main features concerning the customer")
     if user_input in app_train_domain.index.to_list():
         cust_features = pd.to_numeric(desc_features_train[cat_list_float].loc[user_input])
         cust_features_print = cust_features
-        cust_features_print = cust_features_print.map('{:,.1f}'.format)
- 
-       
+        cust_features_print = cust_features_print.map('{:,.1f}'.format)      
     else :
         cust_features = pd.to_numeric(desc_features_test[cat_list_float].loc[user_input])
         cust_features_print = cust_features
