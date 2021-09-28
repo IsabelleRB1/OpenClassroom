@@ -161,14 +161,9 @@ else:
                       'CREDIT_INCOME_PERCENT':'Credit amount over income in %',
                       'AMT_CREDIT':'Credit amount in $','EXT_SOURCE_3':'External source 3',
                       'EXT_SOURCE_2':'External source 2'}
-    col_dict_test = {'CREDIT_TERM':'Credit duration in year','DAYS_BIRTH':'Age', 
-                      'DAYS_EMPLOYED':'Employment duration in year', 'ANNUITY_INCOME_PERCENT':'Annuity over income in %',
-                      'AMT_ANNUITY':'Annuity amount in $',
-                      'CREDIT_INCOME_PERCENT':'Credit amount over income in %',
-                      'AMT_CREDIT':'Credit amount in $','EXT_SOURCE_3':'External source 3',
-                      'EXT_SOURCE_2':'External source 2'}
+  
     desc_features_train = desc_features_train.rename(columns=col_dict)
-    desc_features_test = desc_features_test.rename(columns=col_dict_test)
+    desc_features_test = desc_features_test.rename(columns=col_dict)
    
    
     #convert features
