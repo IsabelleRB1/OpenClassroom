@@ -37,7 +37,7 @@ neigh_model= pickle.load(open(filename_neigh, 'rb'))
 app_train_domain = pd.read_csv('input/app_train_domain_trunc.csv')
 
 app_train_domain.set_index('SK_ID_CURR',inplace=True)
-app_test_domain = pd.read_csv('input/app_test_domain.csv')
+app_test_domain = pd.read_csv('input/app_test_domain_trunc.csv')
 app_test_domain.set_index('SK_ID_CURR',inplace=True)
 
 app_train_domain.drop(app_train_domain[app_train_domain['ANNUITY_INCOME_PERCENT']>1].index, inplace=True)
