@@ -16,7 +16,7 @@ from sklearn.impute import SimpleImputer
 import RadarPlot as rp
 
 
-showWarningOnDirectExecution = true
+showWarningOnDirectExecution = True
 st.set_page_config(layout="wide")
 
 st.sidebar.title("""
