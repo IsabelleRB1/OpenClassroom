@@ -152,7 +152,8 @@ st.write('')
 # load the model from disk
 filename = 'notebook/finalized_model.sav'
 model_reloaded = pickle.load(open(filename, 'rb'))
-
+filename_neigh='notebook/neigh_model.sav'
+neigh_model= pickle.load(open(filename_neigh, 'rb'))
 #read the train and test data
 app_train_domain = pd.read_csv('input/app_train_domain_trunc.csv')
 
@@ -255,18 +256,19 @@ else:
 
     #input missing values
   
-    #imputer=SimpleImputer(missing_values=np.nan,strategy='mean')
+    imputer=SimpleImputer(missing_values=np.nan,strategy='mean')
     #imputer=imputer.fit(train_df_knn_feats)
     #train_df_knn_feats=imputer.transform(train_df_knn_feats)
-    #pred_features_knn = pred_features
-    #pred_features_knn = imputer.transform(pred_features_knn)
+    pred_features_knn = pred_features
+    imputer=imputer.fit(pred_features_knn)
+    pred_features_knn = imputer.transform(pred_features_knn)
    
     #find the neighbors of the training set
     #neigh = NearestNeighbors(n_neighbors=5)
     #neigh.fit(train_df_knn_feats)
 
-    #index_neighbors = neigh.kneighbors(pred_features_knn.reshape(1, -1),return_distance=False)
-    #index_neighbors_id = app_train_domain.iloc[index_neighbors[0]].index
+    index_neighbors = neigh_model.kneighbors(pred_features_knn.reshape(1, -1),return_distance=False)
+    index_neighbors_id = app_train_domain.iloc[index_neighbors[0]].index
     
     
     
@@ -329,7 +331,7 @@ else:
     
    
     st.write("Main features of similar customers")
-    #st.table(desc_features_train_print.loc[index_neighbors_id])
+    st.table(desc_features_train_print.loc[index_neighbors_id])
    
     #Compare the values of a selected set of features with the values of those features for all others customers 
     with st.beta_expander("Make comparison with others customers"):
