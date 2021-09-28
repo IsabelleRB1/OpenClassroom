@@ -16,7 +16,8 @@ from sklearn.impute import SimpleImputer
 import RadarPlot as rp
 
 
-
+import warnings
+warnings.filterwarnings("ignore")
 
 
 st.set_page_config(layout="wide")
