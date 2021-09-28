@@ -41,7 +41,7 @@ app_test_domain = pd.read_csv('input/app_test_domain.csv')
 app_test_domain.set_index('SK_ID_CURR',inplace=True)
 
 app_train_domain.drop(app_train_domain[app_train_domain['ANNUITY_INCOME_PERCENT']>1].index, inplace=True)
-
+app_test_domain.drop(app_test_domain[app_test_domain['ANNUITY_INCOME_PERCENT']>1].index, inplace=True)
 #select features used to make the prediction
 feats = [f for f in app_train_domain.columns if f not in ['TARGET','SK_ID_CURR',
                                                       'SK_ID_BUREAU','SK_ID_PREV','index']]
@@ -51,7 +51,8 @@ loan_id = int(st.sidebar.text_input("Enter the loan request id of the customer",
 user_input=loan_id
 list_id = app_train_domain.index.to_list()
 list_id = list_id + app_test_domain.index.to_list()
-
+if user_input not in app_train_domain.index.to_list():
+        st.write('test',app_test_domain['CREDIT_TERM'].loc[user_input])
 if user_input not in list_id:
     st.sidebar.write("The id entered is unknown")
 else:
@@ -148,8 +149,7 @@ else:
     index_neighbors_id = app_train_domain.iloc[index_neighbors[0]].index
     
     
-    if user_input not in app_train_domain.index.to_list():
-        st.write(app_test_domain['CREDIT_TERM'].loc[user_input])
+    
     #Select main features to compare 
     cat_list = ['TARGET','CREDIT_TERM','DAYS_BIRTH', 
                       'DAYS_EMPLOYED', 'ANNUITY_INCOME_PERCENT','AMT_ANNUITY',
