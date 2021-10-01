@@ -11,7 +11,7 @@ https://www.kaggle.com/c/home-credit-default-risk/data
 
 ### Code
 P7_1_Data_Preparation.ipynb :data exploration and preparation based on the existing kernel Kaggle: https://www.kaggle.com/willkoehrsen/start-here-a-gentle-introduction. Fit the nearest nighbors algorithm to the training data and the save the output in neigh_model.sav to be used in the dashboard.<br/>
-P7_2_Modelisation.ipynb  : Train and test a lightGBM model. Save the output model in file finalized_model.sav to be used in the dashboard<br/>
+P7_2_Modelisation.ipynb  : Train and test a lightGBM model. Save the output model in file finalized_model.sav and the list of inportant features in features_importance.csv to be used in the dashboard<br/>
 P7_3_Dashboard.py : The Dashboard implemented using the streamlit library<br/>
 RadarPlot.py: code to plot a radar plot allowing to compare data of a customer with others<br/>
 
