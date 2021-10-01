@@ -148,14 +148,14 @@ else:
     
     #Select main features to compare 
     cat_list = ['TARGET','CREDIT_TERM','DAYS_BIRTH', 
-                      'DAYS_EMPLOYED', 'ANNUITY_INCOME_PERCENT','AMT_ANNUITY',
-                      'CREDIT_INCOME_PERCENT','AMT_CREDIT','EXT_SOURCE_3','EXT_SOURCE_2']
+                      'DAYS_EMPLOYED', 'ANNUITY_INCOME_PERCENT','AMT_ANNUITY','AMT_INCOME_TOTAL',
+                      'AMT_CREDIT','EXT_SOURCE_3','EXT_SOURCE_2']
     desc_features_train = app_train_domain[cat_list]
     desc_features_test = app_test_domain[cat_list[1:len(cat_list)]]
     col_dict = {'TARGET':'Difficulties payment','CREDIT_TERM':'Credit duration in year','DAYS_BIRTH':'Age', 
                       'DAYS_EMPLOYED':'Employment duration in year', 'ANNUITY_INCOME_PERCENT':'Annuity over income in %',
                       'AMT_ANNUITY':'Annuity amount in $',
-                      'CREDIT_INCOME_PERCENT':'Credit amount over income in %',
+                      'AMT_INCOME_TOTAL':'Income in $',
                       'AMT_CREDIT':'Credit amount in $','EXT_SOURCE_3':'External source 3',
                       'EXT_SOURCE_2':'External source 2'}
   
@@ -174,7 +174,7 @@ else:
     desc_features_test['Employment duration in year'] = round(-desc_features_test['Employment duration in year']/365,1)
 
  
-    cat_list = desc_features_train.columns
+    #cat_list = desc_features_train.columns
     cat_list_float = desc_features_train.columns[1:len(cat_list)]
     desc_features_train_print = pd.DataFrame()
     desc_features_train_print['Difficulties payment'] = desc_features_train['Difficulties payment']
@@ -190,14 +190,12 @@ else:
    
     st.write("Main features concerning the customer")
     if user_input in app_train_domain.index.to_list():
-        cust_features = pd.to_numeric(desc_features_train[cat_list_float].loc[user_input])
-        cust_features_print = cust_features
-        cust_features_print = cust_features_print.map('{:,.1f}'.format)      
+        cust_features= pd.to_numeric(desc_features_train[cat_list_float].loc[user_input])
+        cust_features_print = cust_features.map('{:,.1f}'.format)      
     else :
         cust_features = pd.to_numeric(desc_features_test[cat_list_float].loc[user_input])
-        cust_features_print = cust_features
-        cust_features_print = cust_features_print.map('{:,.1f}'.format)
- 
+        cust_features_print = cust_features.map('{:,.1f}'.format)
+  
     cust_features_print = cust_features_print.to_frame().T
    
     st.table(cust_features_print)
