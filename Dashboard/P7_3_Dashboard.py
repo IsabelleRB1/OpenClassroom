@@ -280,7 +280,7 @@ else:
                          y="Count", color="Payment difficulties",
                          text='Percentage',
                          color_discrete_sequence=['#90ee90', '#ff4500'],
-                         width =1200,
+                         width =800,
                          height=600)
             st.plotly_chart(fig)
            
