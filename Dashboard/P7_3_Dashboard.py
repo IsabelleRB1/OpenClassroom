@@ -149,7 +149,7 @@ else:
     #Select main features to compare 
     cat_list = ['TARGET','CREDIT_TERM','DAYS_BIRTH', 
                       'DAYS_EMPLOYED', 'ANNUITY_INCOME_PERCENT','AMT_ANNUITY','AMT_INCOME_TOTAL',
-                      'AMT_CREDIT','EXT_SOURCE_3','EXT_SOURCE_2']
+                      'AMT_CREDIT','EXT_SOURCE_3']
     desc_features_train = app_train_domain[cat_list]
     desc_features_test = app_test_domain[cat_list[1:len(cat_list)]]
     col_dict = {'TARGET':'Difficulties payment','CREDIT_TERM':'Credit duration in year','DAYS_BIRTH':'Age', 
@@ -157,7 +157,7 @@ else:
                       'AMT_ANNUITY':'Annuity amount in $',
                       'AMT_INCOME_TOTAL':'Income in $',
                       'AMT_CREDIT':'Credit amount in $','EXT_SOURCE_3':'External source 3',
-                      'EXT_SOURCE_2':'External source 2'}
+                      }
   
     desc_features_train = desc_features_train.rename(columns=col_dict)
     desc_features_test = desc_features_test.rename(columns=col_dict)
