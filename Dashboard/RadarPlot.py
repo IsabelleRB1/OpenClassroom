@@ -93,8 +93,8 @@ class RadarChart():
         self.ax.text(0.9, 1, title, transform=self.ax.transAxes, *args, **kw)
         
 def radar_plot(cust_features, desc_features_train, categories, xsize=0.1, ysize=0.05):
-    #features_train_1 = pd.DataFrame(columns=categories)
-    #features_train_0 = pd.DataFrame(columns=categories)
+    features_train_1 = pd.DataFrame(columns=categories)
+    features_train_0 = pd.DataFrame(columns=categories)
     features_min_max=pd.DataFrame(columns=categories)
     # List of descriptive variables
     var_descriptives = [col for col in categories]
@@ -102,12 +102,12 @@ def radar_plot(cust_features, desc_features_train, categories, xsize=0.1, ysize=
     
     features_train_1 = desc_features_train[desc_features_train['Difficulties payment']=='yes'][categories].mean()
     features_train_0 = desc_features_train[desc_features_train['Difficulties payment']=='no'][categories].mean()
-    print(features_train_1)
     cust_features_sel = cust_features[categories] 
+    
     features_min_max.loc[0] =  features_train_1
     features_min_max.loc[1] =  features_train_0
     features_min_max.loc[2] = cust_features[categories]
-    print(features_min_max)
+   
             
     var_descript_ranges = []
     for var in var_descriptives:
