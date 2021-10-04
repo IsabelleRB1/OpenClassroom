@@ -9,7 +9,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 
 import numpy as np
-
+import pandas as pd
 
 
 
@@ -93,21 +93,41 @@ class RadarChart():
         self.ax.text(0.9, 1, title, transform=self.ax.transAxes, *args, **kw)
         
 def radar_plot(cust_features, desc_features_train, categories, xsize=0.1, ysize=0.05):
-    features_train_1 = []
-    features_train_0 = []
-    
+    #features_train_1 = pd.DataFrame(columns=categories)
+    #features_train_0 = pd.DataFrame(columns=categories)
+    features_min_max=pd.DataFrame(columns=categories)
     # List of descriptive variables
     var_descriptives = [col for col in categories]
     
     
     features_train_1 = desc_features_train[desc_features_train['Difficulties payment']=='yes'][categories].mean()
     features_train_0 = desc_features_train[desc_features_train['Difficulties payment']=='no'][categories].mean()
+    print(features_train_1)
     cust_features_sel = cust_features[categories] 
-    
-    # Min,max descriptive varaibles
-    var_descript_ranges = [list(desc_features_train[categories].describe().loc[['min', 'max'], var])
-                           for var in var_descriptives]
-   
+    features_min_max.loc[0] =  features_train_1
+    features_min_max.loc[1] =  features_train_0
+    features_min_max.loc[2] = cust_features[categories]
+    print(features_min_max)
+            
+    var_descript_ranges = []
+    for var in var_descriptives:
+        if var == 'Credit duration in year':
+            var_descript_ranges.append([min(features_min_max['Credit duration in year']) - 5, max(features_min_max['Credit duration in year']) + 1])
+        if var == 'Age':
+            var_descript_ranges.append([min(features_min_max['Age']) - 5, max(features_min_max['Age']) + 5])
+        if var == 'Employment duration in year':
+            var_descript_ranges.append([min(features_min_max['Employment duration in year']) - 1, max(features_min_max['Employment duration in year']) + 1])
+        if(var == 'Annuity over income in %'):
+            var_descript_ranges.append([min(features_min_max['Annuity over income in %']) - 5, max(features_min_max['Annuity over income in %']) + 5])
+        if var == 'Annuity amount in $':
+            var_descript_ranges.append([min(features_min_max['Annuity amount in $']) - 5000, max(features_min_max['Annuity amount in $']) + 5000])
+        if var == 'Income in $':
+            var_descript_ranges.append([min(features_min_max['Income in $'])-20000, max(features_min_max['Income in $']) + 20000])
+        if var == 'Credit amount in $':
+            var_descript_ranges.append([min(features_min_max['Credit amount in $'])-50000, max(features_min_max['Credit amount in $']) + 50000])
+        if var == 'External source 3':
+            var_descript_ranges.append([min(desc_features_train['External source 3']), max(desc_features_train['External source 3'])])
+
  
 
    

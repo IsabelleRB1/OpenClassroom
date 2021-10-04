@@ -39,8 +39,7 @@ app_train_domain.set_index('SK_ID_CURR',inplace=True)
 app_test_domain = pd.read_csv('input/app_test_domain_trunc.csv')
 app_test_domain.set_index('SK_ID_CURR',inplace=True)
 
-app_train_domain.drop(app_train_domain[app_train_domain['ANNUITY_INCOME_PERCENT']>1].index, inplace=True)
-app_test_domain.drop(app_test_domain[app_test_domain['ANNUITY_INCOME_PERCENT']>1].index, inplace=True)
+
 
 #select features used to make the prediction
 feats = [f for f in app_train_domain.columns if f not in ['TARGET','SK_ID_CURR',
