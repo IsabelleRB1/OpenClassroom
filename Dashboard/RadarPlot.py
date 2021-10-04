@@ -132,6 +132,6 @@ def radar_plot(cust_features, desc_features_train, categories, xsize=0.1, ysize=
     #           color='r',
     #           size=14)
   
-    radar.ax.legend(handles = lax, labels=['Customer','Credit granted','Credit not granted'], loc=3, bbox_to_anchor=(0,0,1,1), bbox_transform=fig.transFigure,prop={'size': 6} )
+    radar.ax.legend(handles = lax, labels=['Customer','Credit granted','Credit not granted'], loc=3, bbox_to_anchor=(1,1,1,1), bbox_transform=fig.transFigure,prop={'size': 8} )
     # radar.legend()
     st.pyplot(fig)
